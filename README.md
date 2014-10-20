@@ -1,4 +1,4 @@
-# SilverStripe Organisation Module
+# SilverStripe Organisations Module
 
 Represents organisations in SilverStripe, and provides reusable functionality. Could be repurposed for businesses, clubs, institutions, etc.
 
