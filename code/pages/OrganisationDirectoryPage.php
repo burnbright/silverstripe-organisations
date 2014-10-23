@@ -24,7 +24,8 @@ class OrganisationDirectoryPage_Controller extends Page_Controller{
 				'Title' => $organisation->Title,
 				'Content' => '',
 				'ParentID' => $this->ID,
-				'OrganisationID' => $organisation->ID
+				'OrganisationID' => $organisation->ID,
+				'URLSegment' => 'view/'.$organisation->ID
 			));
 			return new OrganisationPage_Controller($record);
 		}

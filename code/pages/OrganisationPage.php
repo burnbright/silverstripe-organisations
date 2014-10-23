@@ -18,13 +18,29 @@ class OrganisationPage extends Page{
 class OrganisationPage_Controller extends Page_Controller{
 
 	public static $allowed_actions = array(
-		'edit'
+		'edit' => true,
+		'EditOrganisationForm' => '->canEditOrganisation'
 	);
 
-	function edit(){
+	public function edit(){
+		if(!$this->canEditOrganisation()){
+			return Security::permissionFailure($this,
+				"You do not have permission to edit this organisation."
+			);
+		}
+
 		return array(
-			'Title' => 'Editing '.$this->Title
+			'Title' => 'Editing '.$this->Title,
+			'Form' => $this->EditOrganisationForm()
 		);
+	}
+
+	public function EditOrganisationForm(){
+		return new EditOrganisationForm($this, "EditOrganisationForm", $this->Organisation());
+	}
+
+	public function canEditOrganisation(){
+		return $this->Organisation()->canEdit(Member::currentUser());
 	}
 
 }

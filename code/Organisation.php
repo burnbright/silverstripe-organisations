@@ -31,14 +31,22 @@ class Organisation extends DataObject{
 		return $this->Name;
 	}
 
-	public function getProfileLink() {
+	public function ProfileLink($action = null) {
 		if($directory = OrganisationDirectoryPage::get()->first()){
 			return Controller::join_links(
 				$directory->Link(),
 				'view',
-				$this->ID
+				$this->ID,
+				$action
 			);
 		}
+	}
+
+	public function canEdit($member = null){
+		if($member && $this->Members()->byID($member->ID)){
+			return true;
+		}
+		return parent::canEdit($member);
 	}
 
 }
