@@ -22,7 +22,10 @@ class Organisation extends DataObject{
 		$fields = new FieldList(
 			TextField::create("Name", $this->i18n_singular_name()." Name")
 		);
+		$this->extend('updateFrontEndFields', $fields);
 		$this->extend('updateOrganisationFormFields', $fields);
+
+		$fields->removeByName("AddressHeader");
 		
 		return $fields;
 	}
